@@ -4,7 +4,6 @@ return {
     build = ":TSUpdate",
     dependencies = {
         { "nvim-treesitter/nvim-treesitter-context", config = true },
-        { "windwp/nvim-ts-autotag" },
     },
     ---@diagnostic disable
     config = function()
@@ -30,6 +29,7 @@ return {
                 "lua",
                 "make",
                 "markdown",
+                "nix",
                 "prisma",
                 "proto",
                 "python",
@@ -52,14 +52,12 @@ return {
             sync_install = false,
             auto_install = false,
             -- NOTE: install windwp/nvim-ts-autotag
-            autotag = {
-                enable = true,
-            },
-            context_commentstring = {
-                enable = true,
-            },
+            -- autotag = {
+            --    enable = true,
+            -- },
             highlight = {
                 enable = true,
+                -- disable = { "python" },
                 disable = function(_, buf)
                     local max_filesize = 200 * 1024
                     local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))

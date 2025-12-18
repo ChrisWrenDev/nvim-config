@@ -138,12 +138,19 @@ return {
                 )
             end
 
-            table.insert(
-                adapters,
-                require("neotest-vim-test")({
-                    ignore_file_types = { "javascript", "typescript", "javascriptreact", "typescriptreact", "rust" },
-                })
-            )
+            -- table.insert(
+            --     adapters,
+            --     require("neotest-vim-test")({
+            --         ignore_file_types = {
+            --             "javascript",
+            --             "typescript",
+            --             "javascriptreact",
+            --             "typescriptreact",
+            --             "rust",
+            --             "lua",
+            --         },
+            --     })
+            -- )
 
             require("neotest").setup({
                 adapters = adapters,

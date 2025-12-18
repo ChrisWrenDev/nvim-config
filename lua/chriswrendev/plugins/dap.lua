@@ -2,10 +2,32 @@ return {
     {
         "mfussenegger/nvim-dap",
         dependencies = {
+            -- Go debugger
+            {
+                "leoluz/nvim-dap-go",
+                ft = "go",
+                config = function()
+                    require("dap-go").setup()
+                end,
+            },
             -- UI
             {
                 "rcarriga/nvim-dap-ui",
                 dependencies = { "nvim-neotest/nvim-nio" },
+                config = function()
+                    local dap, dapui = require("dap"), require("dapui")
+                    dapui.setup()
+
+                    dap.listeners.after.event_initialized["dapui"] = function()
+                        dapui.open()
+                    end
+                    dap.listeners.before.event_terminated["dapui"] = function()
+                        dapui.close()
+                    end
+                    dap.listeners.before.event_exited["dapui"] = function()
+                        dapui.close()
+                    end
+                end,
             },
 
             -- Virtual text
@@ -65,7 +87,7 @@ return {
                 function()
                     require("dap").toggle_breakpoint()
                 end,
-                desc = "DAP Toggle Breakpoint",
+                desc = "DAP: Toggle breakpoint",
             },
             {
                 "<leader>dB",
@@ -76,12 +98,41 @@ return {
             },
 
             {
+                "<leader>dc",
+                function()
+                    require("dap").continue()
+                end,
+                desc = "DAP: Continue",
+            },
+            {
+                "<leader>do",
+                function()
+                    require("dap").step_over()
+                end,
+                desc = "DAP: Step over",
+            },
+            {
+                "<leader>di",
+                function()
+                    require("dap").step_into()
+                end,
+                desc = "DAP: Step into",
+            },
+            {
+                "<leader>dO",
+                function()
+                    require("dap").step_out()
+                end,
+                desc = "DAP: Step out",
+            },
+            {
                 "<leader>dr",
                 function()
                     require("dap").repl.open()
                 end,
-                desc = "DAP REPL",
+                desc = "DAP: REPL",
             },
+
             {
                 "<leader>dl",
                 function()

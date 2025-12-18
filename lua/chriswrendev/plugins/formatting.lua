@@ -11,6 +11,7 @@ return {
                 javascriptreact = { "prettierd", "prettier", stop_after_first = true },
                 typescriptreact = { "prettierd", "prettier", stop_after_first = true }, -- <-- add prettier fallback
                 svelte = { "prettierd", "prettier", stop_after_first = true },
+                vue = { "prettierd", "prettier", stop_after_first = true },
                 css = { "prettierd", "prettier", stop_after_first = true },
                 html = { "prettierd", "prettier", stop_after_first = true },
                 json = { "prettierd", "prettier", stop_after_first = true },
@@ -21,9 +22,14 @@ return {
 
                 lua = { "stylua" },
                 terraform = { "terraform_fmt" },
-                python = { "isort", "black" }, -- optionally: "ruff_format"
+                python = { "isort", "ruff_format" }, -- optionally: "black" (slower)
                 rust = { "rustfmt" },
                 go = { "goimports", "gofumpt" },
+                sh = { "shfmt" },
+                bash = { "shfmt" },
+                sql = { "sql_formatter" },
+                nix = { "alejandra" },
+                proto = { "buf" },
             },
             -- default options used by both manual format and format-on-save
             default_format_opts = {

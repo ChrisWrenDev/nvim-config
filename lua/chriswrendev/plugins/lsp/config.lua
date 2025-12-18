@@ -7,18 +7,25 @@ local servers = {
     dockerls = {},
     buf_ls = {},
     zls = {},
-    pyright = {},
+    pyright = lang.python, -- type checking
+    ruff = {}, -- linting (errors, warnings, autofix)
     ts_ls = lang.ts,
     gopls = lang.go,
     lua_ls = lang.lua,
     yamlls = lang.yaml,
-    rust_analyzer = lang.rust,
+    -- rust_analyzer = lang.rust, -- handled in rust.lua plugin
     solidity_ls_nomicfoundation = { filetypes = { "solidity", "sol" } },
-    terraformls = { filetypes = { "terraform", "tf" } },
+    terraformls = lang.terraform,
     html = {},
     tailwindcss = { filetypes = { "typescriptreact", "javascriptreact", "css" } },
     prismals = {},
     graphql = { filetypes = { "graphql", "gql" } },
+    eslint = {},
+    bashls = {},
+    sqlls = lang.sql,
+    nixd = lang.nix,
+    svelte = {},
+    vue_ls = { filetypes = { "vue" } },
 }
 
 for name, cfg in pairs(servers) do

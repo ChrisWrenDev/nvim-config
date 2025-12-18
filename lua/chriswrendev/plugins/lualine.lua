@@ -1,5 +1,5 @@
 return {
-    "nvim-lualine/lualine.nvim", -- keep edr3x/lualine.nvim if intentional
+    "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = function()
         local function lsp_name()
@@ -69,7 +69,7 @@ return {
         return {
             options = {
                 icons_enabled = true,
-                theme = "custom_transparent", -- ensure this exists
+                theme = "tokyonight", -- ensure this exists
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
                 disabled_filetypes = { "alpha", "dashboard", "lazy" },

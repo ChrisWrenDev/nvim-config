@@ -5,7 +5,19 @@ M.capabilities = require("blink.cmp").get_lsp_capabilities()
 
 M.on_attach = function(client, bufnr)
     -- Disable LSP formatting where Conform should be in charge
-    if client.name == "ts_ls" or client.name == "tsserver" or client.name == "eslint" or client.name == "null-ls" then
+    if
+        client.name == "ts_ls"
+        or client.name == "tsserver"
+        or client.name == "eslint"
+        or client.name == "null-ls"
+        or client.name == "pyright"
+        or client.name == "ruff"
+        or client.name == "lua_ls"
+        or client.name == "ts_ls"
+        or client.name == "tsserver"
+        or client.name == "vue_ls"
+        or client.name == "svelte"
+    then
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
     end

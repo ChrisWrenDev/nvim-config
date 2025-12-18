@@ -8,6 +8,7 @@ return {
             },
             schemas = {
                 kubernetes = "*.yaml",
+                -- kubernetes = { "k8s/*.yaml", "k8s/*.yml" }, -- less noise
                 ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
                 ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
                 ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = "azure-pipelines.yml",

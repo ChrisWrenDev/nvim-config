@@ -28,10 +28,46 @@ return {
                             "stylua",
                             "prettierd",
                             "prettier",
+                            "eslint-lsp", -- installs ESlint lsp
+                            "eslint_d", -- fastest eslint deamon
+                            -- Python
                             "black",
                             "isort",
+                            "ruff",
+                            "pyright",
+                            -- Golang
                             "goimports",
                             "gofumpt",
+                            "delve", -- needed for dap-go
+                            "golangci-lint",
+                            -- Rust
+                            "rust-analyzer", -- Rustaceanvim will pick this up from Mason
+                            "codelldb",
+                            -- Bash
+                            "bash-language-server", -- lsp
+                            "shellcheck", -- diagnostics
+                            "shfmt", -- formatting
+                            -- Docker
+                            "hadolint",
+                            -- Terraform
+                            "terraform-ls",
+                            "terraform_fmt",
+                            "tflint",
+                            -- SQL
+                            "sql-formatter",
+                            -- Nix
+                            "nixd",
+                            "alejandra", -- formatter
+                            -- Make
+                            "checkmake",
+                            -- Proto
+                            "buf",
+                            -- generators
+                            "protoc-gen-go",
+                            "protoc-gen-go-grpc",
+                            -- "protoc-gen-es", "protoc-gen-connect-es", -- Typescript
+                            "svelte-language-server",
+                            "vue-language-server",
                             -- add more if you use them: "ruff", "eslint_d", "shfmt", "shellcheck", etc.
                         },
                         run_on_start = true,
@@ -52,11 +88,12 @@ return {
     -- optional: keep none-ls only if you need it
     {
         "nvimtools/none-ls.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = { "nvim-lua/plenary.nvim", "nvimtools/none-ls-extras.nvim" },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             local nls = require("null-ls")
-            local diagnostics = nls.builtins.diagnostics
+            local builtins = nls.builtins
+            local diagnostics = builtins.diagnostics
 
             nls.setup({
                 debug = false,
@@ -64,6 +101,11 @@ return {
                     diagnostics.yamllint.with({
                         args = require("chriswrendev.plugins.lsp.lang.yamllint"),
                     }),
+                    diagnostics.golangci_lint,
+                    diagnostics.hadolint, -- dockerfile linting
+                    diagnostics.terraform_validate, -- terraform linting
+                    -- diagnostics.shellcheck, -- bash linting (archived)
+                    diagnostics.checkmake,
                 },
             })
         end,
