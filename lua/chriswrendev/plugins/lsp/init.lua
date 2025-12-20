@@ -9,6 +9,10 @@ return {
         "neovim/nvim-lspconfig",
         event = "BufReadPre",
         dependencies = {
+            {
+                "b0o/schemastore.nvim",
+                lazy = true, -- only loaded when required
+            },
 
             {
                 "williamboman/mason.nvim",
@@ -47,8 +51,9 @@ return {
                             "bash-language-server", -- lsp
                             "shellcheck", -- diagnostics
                             "shfmt", -- formatting
-                            -- Docker
+                            -- Docker / kubernetes
                             "hadolint",
+                            "helm-ls",
                             -- Terraform
                             "terraform-ls",
                             "terraform_fmt",
@@ -68,6 +73,8 @@ return {
                             -- "protoc-gen-es", "protoc-gen-connect-es", -- Typescript
                             "svelte-language-server",
                             "vue-language-server",
+                            --
+                            "yamllint",
                             -- add more if you use them: "ruff", "eslint_d", "shfmt", "shellcheck", etc.
                         },
                         run_on_start = true,

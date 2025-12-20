@@ -27,6 +27,11 @@ return {
             validate = true,
             completion = true,
             hover = true,
+            -- Exclude Helm templates from YAML LS
+            exclude = {
+                "**/templates/**",
+                "**/*.tpl",
+            },
         },
     },
 }

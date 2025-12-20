@@ -18,15 +18,16 @@ return {
             desc = "Install Devdocs",
         },
     },
-    opts = {
-        ensure_installed = {
-            "go",
-            "http",
-            -- "css",
-            -- "javascript",
-            "lua~5.1",
-            "rust",
-        },
-    },
+    -- NOTE: handled in Treesitter
+    --  opts = {
+    --      ensure_installed = {
+    --          "go",
+    --          "http",
+    --          -- "css",
+    --          -- "javascript",
+    --          "lua~5.1",
+    --          "rust",
+    --      },
+    --  },
 }
 -- NOTE: Plugin requires jq, curl and pandoc

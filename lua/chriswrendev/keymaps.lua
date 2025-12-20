@@ -26,8 +26,8 @@ map("n", "<leader><ESC>", "<cmd>qa<CR>", opts)
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "general save file" })
 
 -- move code up and down
-map("n", "<M-j>", ":m+<CR>", opts)          -- move line down
-map("n", "<M-k>", ":m-2<CR>", opts)         -- move line up
+map("n", "<M-j>", ":m+<CR>", opts) -- move line down
+map("n", "<M-k>", ":m-2<CR>", opts) -- move line up
 map("x", "<M-j>", ":m '>+1<CR>gv=gv", opts) -- move code block down
 map("x", "<M-k>", ":m '<-2<CR>gv=gv", opts) -- move code block up
 
@@ -36,36 +36,46 @@ map("x", "<", "<gv", opts)
 map("x", ">", ">gv", opts)
 
 -- formatting
-map("n", "<leader>fm", function()
-    require("conform").format { lsp_fallback = true }
-end, { desc = "general format file" })
+map({ "n", "v" }, "<leader>ft", function()
+    require("conform").format({ lsp_fallback = true, timeout_ms = 1000 })
+end, { desc = "format file or range" })
 
 -- buffer
 map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
 map("n", "<tab>", "<cmd>bnext<CR>", { desc = "buffer goto next" })
 map("n", "<S-tab>", "<cmd>bprev<CR>", { desc = "buffer goto prev" })
-map("n", "<leader>x", "<cmd>bdelete<CR>", { desc = "buffer close" })
+map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "buffer close" })
+map("n", "<leader>ba", function()
+    vim.cmd("%bd|e#|bd#")
+end, { desc = "Delete all other buffers" })
 
 -- navigate around quickfix list
 map("n", "<C-n>", "<cmd>cnext<CR>", opts)
 map("n", "<C-p>", "<cmd>cprev<CR>", opts)
+
+-- tmux sessionizer
+map("n", "<C-f>", function()
+    vim.cmd("silent !tmux neww tmux-sessionizer")
+end, {
+    desc = "tmux-sessionizer (switch project)",
+})
 
 -- avoid vim register for some operations
 map("n", "x", [["_x]], opts)
 map("x", "p", [["_dP]], opts)
 map("v", "<backspace>", '"_d', opts)
 map("n", "<backspace>", '"_dh', opts)
-map("n", "<leader>Y", [["+Y]], opts)               -- copy current line to system clipboard
-map("n", "<leader>vp", "`[v`]", opts)              -- reselect pasted text
+map("n", "<leader>Y", [["+Y]], opts) -- copy current line to system clipboard
+map("n", "<leader>vp", "`[v`]", opts) -- reselect pasted text
 map({ "n", "x", "v" }, "<leader>y", [["+y]], opts) -- copy to system clipboard
-map({ "n", "x" }, "<leader>p", [["+p]], opts)      -- paste from system clipboard
+map({ "n", "x" }, "<leader>p", [["+p]], opts) -- paste from system clipboard
 map("n", "YY", "va{Vy", opts)
 
 -- copy to clipboard
 -- map("v", "<leader>y", '"+y', opts)
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
 
-map("n", "<S-Tab>", "<cmd>tabNext<CR>") -- cycle between tabs
+map("n", "<S-Tab>", "<cmd>tabnext<CR>") -- cycle between tabs
 
 -- split resize
 map("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -90,7 +100,7 @@ map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
 -- telescope
-map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
+map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
 map("n", "<leader>fm", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
@@ -104,6 +114,13 @@ map(
     { desc = "telescope find all files" }
 )
 
+map("n", "<leader>fr", function()
+    require("telescope.builtin").resume()
+end, { desc = "Resume last Telescope search" })
+map("n", "<leader>ls", function()
+    require("telescope.builtin").lsp_document_symbols()
+end, { desc = "LSP document symbols" })
+
 map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
 map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
 map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
@@ -112,7 +129,7 @@ map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidd
 map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
 
 map("n", "<leader>wk", function()
-    vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
+    vim.cmd("WhichKey " .. vim.fn.input("WhichKey: "))
 end, { desc = "whichkey query lookup" })
 
 -- rust analyzer

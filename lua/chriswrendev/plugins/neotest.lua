@@ -11,10 +11,16 @@ return {
 
             "nvim-neotest/neotest-jest",
             "marilari88/neotest-vitest",
+            -- "arthur944/neotest-bun",
 
             "nvim-neotest/neotest-python",
             -- For Rust, many people use neotest-rust or neotest-golang-like community adapters.
             "rouge8/neotest-rust",
+            -- "mrcjkb/rustaceanvim",
+
+            -- "thenbe/neotest-playwright",
+
+            -- "lawrence-laz/neotest-zig",
 
             -- OPTIONAL: fallback for projects that insist on cargo test
             -- (Run support via vim-test; not as rich as native adapters.)
@@ -25,14 +31,14 @@ return {
         keys = {
             -- Run
             {
-                "<leader>tt",
+                "<leader>tn",
                 function()
                     require("neotest").run.run()
                 end,
                 desc = "Test: nearest",
             },
             {
-                "<leader>tT",
+                "<leader>tf",
                 function()
                     require("neotest").run.run(vim.fn.expand("%"))
                 end,
@@ -53,7 +59,7 @@ return {
                 desc = "Test: output",
             },
             {
-                "<leader>tO",
+                "<leader>tp",
                 function()
                     require("neotest").output_panel.toggle()
                 end,
@@ -62,14 +68,14 @@ return {
 
             -- Debug via DAP (adapter must support it)
             {
-                "<leader>td",
+                "<leader>dn",
                 function()
                     require("neotest").run.run({ strategy = "dap" })
                 end,
                 desc = "Test: debug nearest (DAP)",
             },
             {
-                "<leader>tD",
+                "<leader>df",
                 function()
                     require("neotest").run.run({ vim.fn.expand("%"), strategy = "dap" })
                 end,
@@ -125,6 +131,30 @@ return {
                     end,
                 })
             )
+
+            -- Bun
+            -- table.insert(
+            --     adapters,
+            --     require("neotest-bun")({
+            --         -- options
+            --     })
+            -- )
+
+            -- Playwright
+            -- table.insert(
+            --     adapters,
+            --     require("neotest-playwright")({
+            --         -- options
+            --     })
+            -- )
+
+            -- Zig
+            -- table.insert(
+            --     adapters,
+            --     require("neotest-zig")({
+            --         -- options
+            --     })
+            -- )
 
             -- Rust: nextest + DAP test debugging
             -- If you want to only enable it when nextest is installed:

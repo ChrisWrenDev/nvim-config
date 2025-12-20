@@ -13,7 +13,7 @@ return {
         { "<leader>co", "<cmd>GitConflictChooseOurs<cr>", desc = "Conflict: choose ours" },
         { "<leader>ct", "<cmd>GitConflictChooseTheirs<cr>", desc = "Conflict: choose theirs" },
         { "<leader>cb", "<cmd>GitConflictChooseBoth<cr>", desc = "Conflict: choose both" },
-        { "<leader>c0", "<cmd>GitConflictChooseNone<cr>", desc = "Conflict: choose none" },
+        { "<leader>cn", "<cmd>GitConflictChooseNone<cr>", desc = "Conflict: choose none" },
 
         { "]x", "<cmd>GitConflictNextConflict<cr>", desc = "Next conflict" },
         { "[x", "<cmd>GitConflictPrevConflict<cr>", desc = "Prev conflict" },

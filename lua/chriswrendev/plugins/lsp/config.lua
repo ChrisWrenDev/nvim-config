@@ -13,9 +13,11 @@ local servers = {
     gopls = lang.go,
     lua_ls = lang.lua,
     yamlls = lang.yaml,
+    jsonls = lang.json,
     -- rust_analyzer = lang.rust, -- handled in rust.lua plugin
     solidity_ls_nomicfoundation = { filetypes = { "solidity", "sol" } },
     terraformls = lang.terraform,
+    helm_ls = { filetypes = { "helm" } },
     html = {},
     tailwindcss = { filetypes = { "typescriptreact", "javascriptreact", "css" } },
     prismals = {},

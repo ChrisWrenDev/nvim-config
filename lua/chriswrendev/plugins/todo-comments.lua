@@ -11,7 +11,7 @@ return {
             mode = "n",
         },
         {
-            "tN",
+            "tp",
             function()
                 require("todo-comments").jump_prev()
             end,
@@ -19,7 +19,7 @@ return {
             mode = "n",
         },
         {
-            "<leader>ft",
+            "ts",
             ":lua Snacks.picker.todo_comments()<CR>",
             desc = "Search todo comments",
             mode = "n",

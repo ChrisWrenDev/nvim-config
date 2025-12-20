@@ -40,16 +40,20 @@ M.on_attach = function(client, bufnr)
     nmap("<leader>dh", "<cmd>sp | lua vim.lsp.buf.definition()<cr>", "Goto definition (h-split)")
 
     -- Diagnostic
-    nmap("dn", vim.diagnostic.goto_next, "Goto next diagnostic")
-    nmap("dN", vim.diagnostic.goto_prev, "Goto prev diagnostic")
-    nmap("<leader>q", vim.diagnostic.setloclist, "Open diagnostics list")
-    nmap("<leader>e", vim.diagnostic.open_float, "Open diagnostic float")
+    nmap("dn", function()
+        vim.diagnostic.jump({ count = 1 })
+    end, "Goto next diagnostic")
+    nmap("dp", function()
+        vim.diagnostic.jump({ count = -1 })
+    end, "Goto prev diagnostic")
+    nmap("dl", vim.diagnostic.setloclist, "Open diagnostics list")
+    nmap("df", vim.diagnostic.open_float, "Open diagnostic float")
 
-    -- Signature help
+    -- Signature help (show params and types)
     vim.keymap.set("i", "<M-t>", vim.lsp.buf.signature_help, { buffer = bufnr, silent = true })
 
     -- Inlay hints (Neovim ≥ 0.10)
-    nmap("<leader>lh", function()
+    nmap("<leader>ih", function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end, "Toggle inlay hints")
 
