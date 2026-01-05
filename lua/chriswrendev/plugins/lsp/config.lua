@@ -8,6 +8,7 @@ local servers = {
     buf_ls = {},
     zls = {},
     pyright = lang.python, -- type checking
+    mojo = {},
     ruff = {}, -- linting (errors, warnings, autofix)
     ts_ls = lang.ts,
     gopls = lang.go,
@@ -42,8 +43,17 @@ for name, cfg in pairs(servers) do
     vim.lsp.enable(name)
 end
 
+-- mason_lspconfig.setup({
+-- ensure_installed = vim.tbl_keys(servers),
+-- optional (if you want mason-lspconfig to auto-enable):
+-- automatic_enable = true,
+-- })
+
+local all = vim.tbl_keys(servers)
+local available = mason_lspconfig.get_available_servers()
+
 mason_lspconfig.setup({
-    ensure_installed = vim.tbl_keys(servers),
-    -- optional (if you want mason-lspconfig to auto-enable):
-    -- automatic_enable = true,
+    ensure_installed = vim.tbl_filter(function(name)
+        return vim.tbl_contains(available, name)
+    end, all),
 })

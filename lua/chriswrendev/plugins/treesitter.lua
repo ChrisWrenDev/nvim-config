@@ -7,6 +7,20 @@ return {
     },
     ---@diagnostic disable
     config = function()
+        -- temporary setup for mojo
+        local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+        parser_config.mojo = {
+            install_info = {
+                url = "https://github.com/lsh/tree-sitter-mojo.git",
+                files = { "src/parser.c", "src/scanner.c" },
+                branch = "main",
+                requires_generate_from_grammar = false,
+            },
+            filetype = "mojo",
+        }
+
+        -- treesitter setup
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
                 "bash",
@@ -29,6 +43,7 @@ return {
                 "lua",
                 "make",
                 "markdown",
+                "mojo",
                 "nix",
                 "prisma",
                 "proto",
@@ -63,7 +78,8 @@ return {
                     local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
                     return ok and stats and stats.size > max_filesize
                 end,
-                additional_vim_regex_highlighting = false,
+                -- additional_vim_regex_highlighting = false,
+                additional_vim_regex_highlighting = { "mojo" },
             },
             incremental_selection = {
                 enable = true,

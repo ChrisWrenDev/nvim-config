@@ -5,6 +5,14 @@ return {
         local conform = require("conform")
 
         conform.setup({
+            -- Register custom Mojo formatter
+            formatters = {
+                mojo = {
+                    command = "mojo",
+                    args = { "format", "$FILENAME" },
+                    stdin = false, -- mojo format operates on files, no stdin
+                },
+            },
             formatters_by_ft = {
                 javascript = { "prettierd", "prettier", stop_after_first = true },
                 typescript = { "prettierd", "prettier", stop_after_first = true },
@@ -23,6 +31,7 @@ return {
                 lua = { "stylua" },
                 terraform = { "terraform_fmt" },
                 python = { "isort", "ruff_format" }, -- optionally: "black" (slower)
+                mojo = { "mojo" },
                 rust = { "rustfmt" },
                 go = { "goimports", "gofumpt" },
                 sh = { "shfmt" },
